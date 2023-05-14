@@ -1,12 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import ACTION_TYPES from '../actions/actionTypes'
+import * as actionCreators from '../actions/actionCreators'
 
  function Counter(props) {
-  const {value, inc, dec} = props
+  const {value, inc, dec, step, setStep} = props
+    const stepHandler = (event) => {
+         setStep (Number(event.target.value))
+    }
     return (
     <div>
         <p>Total: {value} </p>
-        
+        <input type = 'number' value = {step} onChange={stepHandler}/>
         <button onClick = {inc}>
             +
         </button>
@@ -19,8 +24,9 @@ import {connect} from 'react-redux'
 
 const mapActions = (dispatch) => {
     return{
-        inc: () => dispatch ({type: 'INC'}),
-        dec: () => dispatch ({type:'DEC'})
+        inc: () => dispatch (actionCreators.inc ()),
+        dec: () => dispatch (actionCreators.dec ()),
+        setStep: (newValue) => dispatch (actionCreators.setStep(newValue))
     }
 }
 
