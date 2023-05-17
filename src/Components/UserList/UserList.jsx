@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ACTION_TYPES from '../../actions/actionTypes'
 import * as actionsCreators from '../../actions/actionCreators';
+import {CreateUser,GetUser, UpdateUser, DeleteUser} from '../../Slices/userSlicer';
 
 
 function UserList(props) {
   const {users, error, isLoading, currentUser,
     getAction, createAction, updateAction, deleteAction} = props;
-    console.log (users)
-    const mapUsers = (u, i) => {
+      const mapUsers = (u, i) => {
       const updateHandler = () => {updateAction({id: u.id, isSelected:!u.isSelected})}
       const deleteHandler = () => {deleteAction(u.id)}
           return(
@@ -23,7 +23,7 @@ function UserList(props) {
       <>
       User lists:
       <ul>
-        {users?.map(mapUsers)}
+        {props.state.users.map(mapUsers)}
       </ul>
   </>
 
@@ -35,10 +35,14 @@ function UserList(props) {
 
 const mapActions = (dispatch) => {
   return{
-      getAction: (id) => dispatch(actionsCreators.getUser(id)),
-      createAction: (data) => dispatch(actionsCreators.createUser(data)),
-      updateAction: (data) => dispatch(actionsCreators.updateUser(data)),
-      deleteAction: (id) => dispatch(actionsCreators.deleteUser(id)),
+      // getAction: (id) => dispatch(actionsCreators.getUser(id)),
+      // createAction: (data) => dispatch(actionsCreators.createUser(data)),
+      // updateAction: (data) => dispatch(actionsCreators.updateUser(data)),
+      // deleteAction: (id) => dispatch(actionsCreators.deleteUser(id)),
+      getAction: (id) => dispatch(GetUser(id)),
+      createAction: (data) => dispatch(CreateUser(data)),
+      updateAction: (data) => dispatch(UpdateUser(data)),
+      deleteAction: (id) => dispatch(DeleteUser(id)),
   }
 }
 

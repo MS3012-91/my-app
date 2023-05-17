@@ -18,7 +18,7 @@ const initialState = {
     isLoading: false,
 };
 
-const UserReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch(action.type){
         case ACTION_TYPES.CREATE_USER: {
             const newUser = {...action.data, id: i++};
@@ -41,9 +41,9 @@ const UserReducer = (state = initialState, action) => {
             updDB.splice(updDB.findIndex(u => action.id == u.id),1);
             return {users: updDB};
         };
-        default: return users;
+        default: return state;
     }
     
 };
 
-export default UserReducer;
+export default userReducer;
